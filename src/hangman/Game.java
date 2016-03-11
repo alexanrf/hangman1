@@ -12,7 +12,7 @@ public class Game{
 	private String guesWord;
 	
 	
-	
+	private int testInt;
 	
 	private StringBuffer dashedWord;
 	private FileReadWriter filerw;
