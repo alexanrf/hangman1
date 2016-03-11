@@ -9,8 +9,7 @@ public class Game{
 			"software", "debugger", "compiler", "developer", "algorithm",
 			"array", "method", "variable" };
 
-	private String guesWord;
-	
+	private String guessWord;
 	
 	private int testInt;
 	
@@ -18,8 +17,8 @@ public class Game{
 	private FileReadWriter filerw;
 
 	public Game(boolean autoStart) {
-		guesWord = getRandWord();
-		dashedWord = getW(guesWord);
+		guessWord = getRandWord();
+		dashedWord = getW(guessWord);
 		filerw = new FileReadWriter();
 		if(autoStart) {
 			displayMenu();
@@ -48,7 +47,7 @@ public class Game{
 
 		do {
 			System.out.println("The secret word is: " + printDashes(dashBuff));
-			System.out.println("DEBUG " + guesWord);
+			System.out.println("DEBUG " + guessWord);
 			do {
 				System.out.println("Enter your gues(1 letter alowed): ");
 				Scanner input = new Scanner(System.in);
@@ -59,7 +58,7 @@ public class Game{
 					int i = 0, j = 0;
 					while (j < 1) {
 						if (dashBuff.charAt(i) == '_') {
-							dashBuff.setCharAt(i, guesWord.charAt(i));
+							dashBuff.setCharAt(i, guessWord.charAt(i));
 							++j;
 						}
 						++i;
@@ -72,8 +71,8 @@ public class Game{
 			} while (!letter.matches("[a-z]"));
 
 			int counter = 0;
-			for (int i = 0; i < guesWord.length(); i++) {
-				String currentLetter = Character.toString(guesWord.charAt(i));
+			for (int i = 0; i < guessWord.length(); i++) {
+				String currentLetter = Character.toString(guessWord.charAt(i));
 				if (letter.equals(currentLetter)) {
 					
 					{
@@ -96,7 +95,7 @@ public class Game{
 						counter);
 			}
 
-		} while (!dashBuff.toString().equals(guesWord));
+		} while (!dashBuff.toString().equals(guessWord));
 
 		if (isHelpUsed == false) {
 			System.out.println("You won with " + mistakes + " mistake(s).");
