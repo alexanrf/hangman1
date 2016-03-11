@@ -10,9 +10,10 @@ public class Game{
 			"array", "method", "variable" };
 
 	private String guessWord;
-	
+	private String commitTest;
+
 	private int testInt;
-	
+
 	private StringBuffer dashedWord;
 	private FileReadWriter filerw;
 
