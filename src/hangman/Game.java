@@ -48,7 +48,7 @@ public class Game{
 
 		do {
 			System.out.println("The secret word is: " + printDashes(dashBuff));
-			System.out.println("DEBUG " + guesWord);
+			System.out.println("DEBUGs " + guesWord);
 			do {
 				System.out.println("Enter your gues(1 letter alowed): ");
 				Scanner input = new Scanner(System.in);
