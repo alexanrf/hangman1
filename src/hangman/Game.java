@@ -3,23 +3,19 @@ package hangman;
 import java.util.Random;
 import java.util.Scanner;
 
-// ve4e pi6a mnogo dobre na java, napisah vsi4ko za 2 4asa i trugna ot raz, yahuuaoaoaoaaauuuuu
 public class Game{
 	private static final String[] wordForGuesing = { "computer", "programmer",
 			"software", "debugger", "compiler", "developer", "algorithm",
 			"array", "method", "variable" };
 
 	private String guessWord;
-	private String commitTest;
-
-	private int testInt;
 
 	private StringBuffer dashedWord;
 	private FileReadWriter filerw;
 
 	public Game(boolean autoStart) {
 		guessWord = getRandWord();
-		dashedWord = getW(guessWord);
+		dashedWord = getWord(guessWord);
 		filerw = new FileReadWriter();
 		if(autoStart) {
 			displayMenu();
@@ -29,8 +25,7 @@ public class Game{
 
 	private String getRandWord() {
 		Random rand = new Random();
-		String randWord = wordForGuesing[rand.nextInt(9)];
-		return randWord;
+		return wordForGuesing[rand.nextInt(9)];
 	}
 	public void displayMenu() {
 		System.out
@@ -50,7 +45,7 @@ public class Game{
 			System.out.println("The secret word is: " + printDashes(dashBuff));
 			System.out.println("DEBUG " + guessWord);
 			do {
-				System.out.println("Enter your gues(1 letter alowed): ");
+				System.out.println("Enter your guess(1 letter alowed): ");
 				Scanner input = new Scanner(System.in);
 				letter = input.next();
 
@@ -98,7 +93,7 @@ public class Game{
 
 		} while (!dashBuff.toString().equals(guessWord));
 
-		if (isHelpUsed == false) {
+		if (!isHelpUsed) {
 			System.out.println("You won with " + mistakes + " mistake(s).");
 			System.out.println("The secret word is: " + printDashes(dashBuff));
 
@@ -107,16 +102,13 @@ public class Game{
 			Scanner input = new Scanner(System.in);
 			String playerName = input.next();
 
-			{
-				filerw.openFileToWite();
-				filerw.addRecords(mistakes, playerName);
-				filerw.closeFileFromWriting();
-				filerw.openFiletoRead();
-				filerw.readRecords();
-				filerw.closeFileFromReading();
-				filerw.printAndSortScoreBoard();
-			}
-
+			filerw.openFileToWite();
+			filerw.addRecords(mistakes, playerName);
+			filerw.closeFileFromWriting();
+			filerw.openFiletoRead();
+			filerw.readRecords();
+			filerw.closeFileFromReading();
+			filerw.printAndSortScoreBoard();
 			
 		} else {
 			System.out
@@ -148,7 +140,7 @@ public class Game{
 		}
 	}
 
-	private StringBuffer getW(String word) {
+	private StringBuffer getWord(String word) {
 		StringBuffer dashes = new StringBuffer("");
 		for (int i = 0; i < word.length(); i++) {
 			dashes.append("_");
