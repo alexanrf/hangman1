@@ -49,7 +49,7 @@ public class Game{
 				Scanner input = new Scanner(System.in);
 				letter = input.next();
 
-				if (letter.equals(Command.help.toString())) {
+				if (letter.equals("help")) {
 					isHelpUsed = true;
 					int i = 0, j = 0;
 					while (j < 1) {
@@ -63,32 +63,24 @@ public class Game{
 							+ printDashes(dashBuff));
 				}// end if
 				menu(letter);
-
 			} while (!letter.matches("[a-z]"));
 
 			int counter = 0;
 			for (int i = 0; i < guessWord.length(); i++) {
 				String currentLetter = Character.toString(guessWord.charAt(i));
 				if (letter.equals(currentLetter)) {
-					
-					{
-					
 					++counter;
-					}
 					dashBuff.setCharAt(i, letter.charAt(0));
 				}
 			}
 
 			if (counter == 0) {
 				++mistakes;
-				{
-					System.out.printf(
-							"Sorry! There are no unrevealed letters \'%s\'. \n",
-							letter);
-				}
-			} else {
-				System.out.printf("Good job! You revealed %d letter(s).\n",
-						counter);
+					System.out.printf("Sorry! There are no unrevealed letters \'%s\'. \n", letter);
+
+			}
+			else{
+				System.out.printf("Good job! You revealed %d letter(s).\n", counter);
 			}
 
 		} while (!dashBuff.toString().equals(guessWord));
@@ -97,8 +89,7 @@ public class Game{
 			System.out.println("You won with " + mistakes + " mistake(s).");
 			System.out.println("The secret word is: " + printDashes(dashBuff));
 
-			System.out
-					.println("Please enter your name for the top scoreboard:");
+			System.out.println("Please enter your name for the top scoreboard:");
 			Scanner input = new Scanner(System.in);
 			String playerName = input.next();
 
@@ -122,45 +113,35 @@ public class Game{
 		new Game(true);
 		
 	}// end method
+
 	private void menu(String letter) {
-		if (letter.equals(Command.restart.toString())) {
+		if (letter.equals("restart")) {
 			new Game(true);
-		} else {
-			if (letter.equals(Command.top.toString())) {
+		} else if (letter.equals("top")) {
 				filerw.openFiletoRead();
 				filerw.readRecords();
 				filerw.closeFileFromReading();
 				filerw.printAndSortScoreBoard();
 				new Game(true);
-			} else {
-				if (letter.equals(Command.exit.toString())) {
-					System.exit(1);
-				}
-			}
+		} else if (letter.equals("exit")) {
+				System.exit(1);
 		}
 	}
+
 
 	private StringBuffer getWord(String word) {
 		StringBuffer dashes = new StringBuffer("");
 		for (int i = 0; i < word.length(); i++) {
 			dashes.append("_");
-			
-			
-			
 		}
 		return dashes;
 	}
+
 	private String printDashes(StringBuffer word) {
 		String toDashes = "";
-		
-		
 		for (int i = 0; i < word.length(); i++) {
-			
-			
-			
 			toDashes += (" " + word.charAt(i));
 		}
 		return toDashes;
-
 	}
 }
